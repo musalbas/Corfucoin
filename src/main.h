@@ -28,7 +28,7 @@ struct CBlockIndexWorkComparator;
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
 static const unsigned int MAX_BLOCK_SIZE = 1000000;                      // 1000KB block hard limit
 /** The maximum size for mined blocks */
-static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/4;         // 250KB  block soft limit
+static const unsigned int MAX_BLOCK_SIZE_GEN = 250000;         // 250KB  block soft limit
 /** The maximum size for transactions we're willing to relay/mine */
 static const unsigned int MAX_STANDARD_TX_SIZE = MAX_BLOCK_SIZE_GEN/2.5; // 100KB tx size limit
 /** The maximum allowed number of signature check operations in a block (network rule) */
@@ -38,11 +38,11 @@ static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
 /** The maximum number of entries in an 'inv' protocol message */
 static const unsigned int MAX_INV_SZ = 50000;
 /** The maximum size of a blk?????.dat file (since 0.8) */
-static const unsigned int MAX_BLOCKFILE_SIZE = 0x8000000; // 128 MiB
+static const unsigned int MAX_BLOCKFILE_SIZE = 134217728; // 128 MiB
 /** The pre-allocation chunk size for blk?????.dat files (since 0.8) */
-static const unsigned int BLOCKFILE_CHUNK_SIZE = 0x1000000; // 16 MiB
+static const unsigned int BLOCKFILE_CHUNK_SIZE = 16777216; // 16 MiB
 /** The pre-allocation chunk size for rev?????.dat files (since 0.8) */
-static const unsigned int UNDOFILE_CHUNK_SIZE = 0x100000; // 1 MiB
+static const unsigned int UNDOFILE_CHUNK_SIZE = 1048576; // 1 MiB
 /** Fake height value used in CCoins to signify they are only in the memory pool (since 0.8) */
 static const unsigned int MEMPOOL_HEIGHT = 0x7FFFFFFF;
 /** Dust Soft Limit, allowed with additional fee per output */
@@ -50,7 +50,7 @@ static const int64 DUST_SOFT_LIMIT = 1000000; // 0.01 LTC
 /** Dust Hard Limit, ignored as wallet inputs (mininput default) */
 static const int64 DUST_HARD_LIMIT = 10000;   // 0.0001 LTC mininput
 /** No amount larger than this (in satoshi) is valid */
-static const int64 MAX_MONEY = 84000000 * COIN;
+static const int64 MAX_MONEY = 8400000000000000;
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
 static const int COINBASE_MATURITY = 100;
@@ -1471,8 +1471,8 @@ public:
             return error("%s() : deserialize or I/O error", __PRETTY_FUNCTION__);
         }
 
-        // Check the header
-        if (!CheckProofOfWork(GetPoWHash(), nBits))
+        // Check the PoW but not for the genesis block
+        if (hashPrevBlock != 0 && !CheckProofOfWork(GetPoWHash(), nBits))
             return error("CBlock::ReadFromDisk() : errors in block header");
 
         return true;
