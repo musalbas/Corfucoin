@@ -1244,6 +1244,7 @@ void ThreadDNSAddressSeed()
 
 unsigned int pnSeed[] =
 {
+    0xdab98705, // Operated by Mustafa Al-Bassam
 };
 
 void DumpAddresses()
@@ -1324,7 +1325,7 @@ void ThreadOpenConnections()
                 addr.nTime = GetTime()-GetRand(nOneWeek)-nOneWeek;
                 vAdd.push_back(addr);
             }
-            addrman.Add(vAdd, CNetAddr("5.135.185.218")); // Operated by Mustafa Al-Bassam
+            addrman.Add(vAdd, CNetAddr("127.0.0.1"));
         }
 
         //
