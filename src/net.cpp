@@ -1324,7 +1324,7 @@ void ThreadOpenConnections()
                 addr.nTime = GetTime()-GetRand(nOneWeek)-nOneWeek;
                 vAdd.push_back(addr);
             }
-            addrman.Add(vAdd, CNetAddr("178.62.58.20")); // Operated by Mustafa Al-Bassam
+            addrman.Add(vAdd, CNetAddr("5.135.185.218")); // Operated by Mustafa Al-Bassam
         }
 
         //
