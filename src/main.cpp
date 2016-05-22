@@ -1079,7 +1079,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 302400; // Corfucoin: 3.5 days
+static const int64 nTargetTimespan = 2400; // Corfucoin: 3.5 days
 static const int64 nTargetSpacing = 150; // Corfucoin: 2.5 minutes
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
 
