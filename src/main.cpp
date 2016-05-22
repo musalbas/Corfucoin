@@ -31,7 +31,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x885c57a286c5391328dc75efbf186df5f64eb0e5f7841378bd9f619bdd4e9d3f");
+uint256 hashGenesisBlock("0x8e4de98bfe6a6f25cfea04ec4a7408a520b4326c0b26afb9b6389b852c2b47e7");
 static CBigNum bnProofOfWorkLimit = CBigNum().SetCompact(504365644); // Corfucoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
